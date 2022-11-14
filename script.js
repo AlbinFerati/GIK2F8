@@ -35,7 +35,7 @@ function searchBooks(searchTerm) {
         const title = bookList[i].title.toLowerCase(); 
         if (title.indexOf(searchTerm.toLowerCase()) >= 0) {
             console.log("match?");
-            filteredList.push(bookList[0]);
+            filteredList.push(bookList[i]);
         }
     }
     renderBookList(filteredList);
@@ -46,5 +46,6 @@ function searchBooks(searchTerm) {
 handleKeyPress('e')
 
 function renderBookList(list) {
+    /* Element i HTML-Listan visas eller döljs beroende på listans innehåll. */
     console.log(list);
 }
