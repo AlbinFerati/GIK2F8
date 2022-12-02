@@ -50,23 +50,17 @@ function searchBooks(searchTerm) {
 
 function renderBookList(bookList) {
     //Vi gör en sträng som börjar med ett ul element och stänger med ett ul element
-        let html = `<ul class="book-list rounded-md border-2 border-blue-400 bg-white w-full mx-auto">`;
-        for (let i = 0 ;i < bookList.length; i++)
-        {	
-        html += `<li 
-        class="book-list__item mb-2 mx-2 last:mb-0 p-3 text-indigo-900 last:border-b-0 border-b border-indigo-700 cursor-pointer">
-        ${bookList[i].author} - ${bookList[i].title}
-        </li>`;
-        }
-        html += `</ul>`;
+ 
 
     const existingElement = document.querySelector(".book-list");
     console.log(existingElement);
+
     const root = document.getElementById('root');
     if (existingElement) {
         root.removeChild(existingElement) //tar bort ul element om det finns
     }
-    
-    root.insertAdjacentHTML('beforeend', html); // lägger till ul om det finns
+    if(bookList.length > 0) {
+        root.insertAdjacentHTML('beforeend', BookList(bookList)); // lägger till ul om det finns
     }
+}
 
