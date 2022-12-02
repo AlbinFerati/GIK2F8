@@ -15,8 +15,7 @@ const bookList = [
 ];
  
 // const searchInput = document.children[0].children[1].children[1].children[1];
-const searchField = document.getElementById("searchField")
-console.log(searchField);
+// const searchField = document.getElementById("searchField")
 
 /* keydown, keyup */
 //söker så fort ett nytt tecken trykcs ner
@@ -46,12 +45,28 @@ function searchBooks(searchTerm) {
         filteredList.push(bookList[i]);
        }
    } 
-   console.log(filteredList);
+   renderBookList(filteredList);
 }
 
-function renderBookList(list) {
-        /* Element i HTML-Listan visas eller döljs beroende på listans innehåll. */
-        console.log(list);
+function renderBookList(bookList) {
+    //Vi gör en sträng som börjar med ett ul element och stänger med ett ul element
+        let html = `<ul class="book-list rounded-md border-2 border-blue-400 bg-white w-full mx-auto">`;
+        for (let i = 0 ;i < bookList.length; i++)
+        {	
+        html += `<li 
+        class="book-list__item mb-2 mx-2 last:mb-0 p-3 text-indigo-900 last:border-b-0 border-b border-indigo-700 cursor-pointer">
+        ${bookList[i].author} - ${bookList[i].title}
+        </li>`;
+        }
+        html += `</ul>`;
+
+    const existingElement = document.querySelector(".book-list");
+    console.log(existingElement);
+    const root = document.getElementById('root');
+    if (existingElement) {
+        root.removeChild(existingElement) //tar bort ul element om det finns
+    }
+    
+    root.insertAdjacentHTML('beforeend', html); // lägger till ul om det finns
     }
 
-    
