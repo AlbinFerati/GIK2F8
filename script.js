@@ -1,6 +1,5 @@
  'use strict';
- /* Vad ska vi göra här? */
-
+// 64 rader kod
 const bookList = [ 
     {
         id: 1, 
@@ -14,23 +13,41 @@ const bookList = [
     }
 ];
  
-// const searchInput = document.children[0].children[1].children[1].children[1];
 // const searchField = document.getElementById("searchField")
 
 /* keydown, keyup */
 //söker så fort ett nytt tecken trykcs ner
-searchField.addEventListener("keyup", handleKeyPress);
 
+
+/////////////////////////////////
+/* searchField.addEventListener("keyup", (e) =>searchBooks(e.target.value)); */
+
+
+/* Denna funktion gör samma som " (e) =>searchBooks(e.target.value)" som är skrivet ovan
 
 function handleKeyPress(e) {
-    // Ta emot/läsa av vätdet i inputfältet. 
-    // Skicka värdet till searchBooks
-    // searchBooks returnerar en filtrerad lista
-    // Filtrerade listan skicaks till renderBookList
+    Ta emot/läsa av vätdet i inputfältet. 
+    Skicka värdet till searchBooks
+    searchBooks returnerar en filtrerad lista
+    Filtrerade listan skicaks till renderBookList
     searchBooks(e.target.value);
-}
+} 
+Detta är även vad searchField gör
+*/
+////////////////////////////////
+searchField.addEventListener("keyup", (e) => 
+    renderBookList(
+     bookList.filter(
+        ({title, author}) => {
+            const searchTerm = e.target.value.toLowerCase();
+            return title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 || author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 
+        })
+    )
+);
 
+const func = () => console.log();
 
+//Detta sköts av "Components" nu
 function searchBooks(searchTerm) {
     /* Loopa igenom bookList
     Förvarje varv i loopen, ta det aktuella elementet (boken)
@@ -38,14 +55,19 @@ function searchBooks(searchTerm) {
     Om söktrermen finns någonstans i titeln, lägg till elementet i ny lista (filteredList) 
     Returnera filteredList eller anropar renderBookList?
     */
-   const filteredList= [];
-   for (let i = 0 ;i < bookList.length; i++) {
+
+   /* for (let i = 0 ;i < bookList.length; i++) {
        const title = bookList[i].title.toLowerCase();
        if (title.indexOf(searchTerm.toLowerCase()) >= 0) {
         filteredList.push(bookList[i]);
        }
-   } 
-   renderBookList(filteredList);
+   }  */
+   /* renderBookList(
+    bookList.filter(
+    ({title, author}) => 
+        title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 || 
+        author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 
+        )); */
 }
 
 function renderBookList(bookList) {
