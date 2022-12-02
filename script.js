@@ -1,7 +1,12 @@
  'use strict';
 // 64 rader kod
-const bookList = [ 
-    {
+let bookList = [] 
+
+//get all refererar till alla böcker så koden som är kommenterad ut behövs intez
+window.addEventListener("load", () => {
+    getAll().then(apiBooks => (bookList = apiBooks));
+});
+   /*  {
         id: 1, 
         author: 'Charles Dickens',
         title: 'Oliver Twist'
@@ -11,7 +16,7 @@ const bookList = [
         author: 'William Shakespear', 
         title: 'Hamlet'
     }
-];
+]; */
  
 // const searchField = document.getElementById("searchField")
 
@@ -19,8 +24,9 @@ const bookList = [
 //söker så fort ett nytt tecken trykcs ner
 
 
+
 /////////////////////////////////
-/* searchField.addEventListener("keyup", (e) =>searchBooks(e.target.value)); */
+searchField.addEventListener("keyup", (e) =>searchBooks(e.target.value));
 
 
 /* Denna funktion gör samma som " (e) =>searchBooks(e.target.value)" som är skrivet ovan
@@ -35,7 +41,7 @@ function handleKeyPress(e) {
 Detta är även vad searchField gör
 */
 ////////////////////////////////
-searchField.addEventListener("keyup", (e) => 
+/* searchField.addEventListener("keyup", (e) => 
     renderBookList(
      bookList.filter(
         ({title, author}) => {
@@ -43,12 +49,12 @@ searchField.addEventListener("keyup", (e) =>
             return title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 || author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 
         })
     )
-);
+); */
 
 const func = () => console.log();
 
 //Detta sköts av "Components" nu
-function searchBooks(searchTerm) {
+async function searchBooks(searchTerm) {
     /* Loopa igenom bookList
     Förvarje varv i loopen, ta det aktuella elementet (boken)
     Jämför titeln med söktermen
@@ -62,12 +68,13 @@ function searchBooks(searchTerm) {
         filteredList.push(bookList[i]);
        }
    }  */
-   /* renderBookList(
+   const bookList = await getAll();
+   renderBookList(
     bookList.filter(
     ({title, author}) => 
         title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 || 
         author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 
-        )); */
+        ));
 }
 
 function renderBookList(bookList) {
@@ -85,4 +92,3 @@ function renderBookList(bookList) {
         root.insertAdjacentHTML('beforeend', BookList(bookList)); // lägger till ul om det finns
     }
 }
-
